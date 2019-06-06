@@ -3,351 +3,351 @@
   "DisplayName": "File Registry",
   "Description": "This application contains a Registry to register filess and file contracts that can be registered within it. Post-registration ownership is not recorded.",
   "ApplicationRoles": [
-    {
-      "Name": "Registrar",
-      "Description": "Owner of the registry"
-    },
-    {
-      "Name": "FileManager",
-      "Description": "Manager of all files"
-    }
+  {
+    "Name": "Registrar",
+    "Description": "Owner of the registry"
+  },
+  {
+    "Name": "FileManager",
+    "Description": "Manager of all files"
+  }
   ],
   "Workflows": [
+  {
+    "Name": "FileRegistry",
+    "DisplayName": "File Registries",
+    "Description": "Registries to track files",
+    "Initiators": ["Registrar"],
+    "StartState":  "Created",
+    "Properties": [
     {
-      "Name": "FileRegistry",
-      "DisplayName": "File Registries",
-      "Description": "Registries to track files",
-      "Initiators": ["Registrar"],
-      "StartState":  "Created",
-      "Properties": [
-        {
-          "Name": "State",
-          "DisplayName": "State",
-          "Description": "State of the registry",
-          "Type": {
-            "Name": "state"
-          }
-        },
-        {
-          "Name": "Name",
-          "DisplayName": "Registry Name",
-          "Description": "Name of the registry",
-          "Type": {
-            "Name": "string"
-          }
-        },
-        {
-          "Name": "Description",
-          "DisplayName": "Description",
-          "Description": "Description of the registry",
-          "Type": {
-            "Name": "string"
-          }
-        }
-      ],
-      "Constructor": {
-        "Parameters": [
-          {
-            "Name": "name",
-            "Description": "Name of the registry",
-            "DisplayName": "Registry Name",
-            "Type": {
-              "Name": "string"
-            }
-          },
-          {
-            "Name": "description",
-            "Description": "Description of the registry",
-            "DisplayName": "Description",
-            "Type": {
-              "Name": "string"
-            }
-          }
-
-        ]
+      "Name": "State",
+      "DisplayName": "State",
+      "Description": "State of the registry",
+      "Type": {
+      "Name": "state"
+      }
+    },
+    {
+      "Name": "Name",
+      "DisplayName": "Registry Name",
+      "Description": "Name of the registry",
+      "Type": {
+      "Name": "string"
+      }
+    },
+    {
+      "Name": "Description",
+      "DisplayName": "Description",
+      "Description": "Description of the registry",
+      "Type": {
+      "Name": "string"
+      }
+    }
+    ],
+    "Constructor": {
+    "Parameters": [
+      {
+      "Name": "name",
+      "Description": "Name of the registry",
+      "DisplayName": "Registry Name",
+      "Type": {
+        "Name": "string"
+      }
       },
-      "Functions": [
-        {
-          "Name": "OpenRegistry",
-          "DisplayName": "Open Registry",
-          "Description": "Opens the registry",
-          "Parameters": []
-        },
-        {
-          "Name": "CloseRegistry",
-          "DisplayName": "Close Registry",
-          "Description": "Closes the registry",
-          "Parameters": []
-        }
-      ],
-      "States": [
-        {
-          "Name": "Created",
-          "DisplayName": "Registry Created",
-          "Description": "Registry has been created",
-          "PercentComplete": 0,
-          "Style": "Success",
-          "Transitions": [
-            {
-              "AllowedRoles": ["Registrar"],
-              "AllowedInstanceRoles": [],
-              "Description": "Open Registry",
-              "Function": "OpenRegistry",
-              "NextStates": [ "Open" ],
-              "DisplayName": "Registry has been opened"
-            }
-          ]
-        },
-        {
-          "Name": "Open",
-          "DisplayName": "Registry Opened",
-          "Description": "Registry has been opened",
-          "PercentComplete": 100,
-          "Style": "Success",
-          "Transitions": [            
-            {
-              "AllowedRoles": ["Registrar"],
-              "AllowedInstanceRoles": [],
-              "Description": "Close Registry",
-              "Function": "CloseRegistry",
-              "NextStates": [ "Closed" ],
-              "DisplayName": "Registry has been closed"
-            }
-          ]
-        },
-        {
-          "Name": "Closed",
-          "DisplayName": "Registry Closed",
-          "Description": "Registry has been closed",
-          "PercentComplete": 100,
-          "Style": "Success",
-          "Transitions": []
-        }
+      {
+      "Name": "description",
+      "Description": "Description of the registry",
+      "DisplayName": "Description",
+      "Type": {
+        "Name": "string"
+      }
+      }
+
+    ]
+    },
+    "Functions": [
+    {
+      "Name": "OpenRegistry",
+      "DisplayName": "Open Registry",
+      "Description": "Opens the registry",
+      "Parameters": []
+    },
+    {
+      "Name": "CloseRegistry",
+      "DisplayName": "Close Registry",
+      "Description": "Closes the registry",
+      "Parameters": []
+    }
+    ],
+    "States": [
+    {
+      "Name": "Created",
+      "DisplayName": "Registry Created",
+      "Description": "Registry has been created",
+      "PercentComplete": 0,
+      "Style": "Success",
+      "Transitions": [
+      {
+        "AllowedRoles": ["Registrar"],
+        "AllowedInstanceRoles": [],
+        "Description": "Open Registry",
+        "Function": "OpenRegistry",
+        "NextStates": [ "Open" ],
+        "DisplayName": "Registry has been opened"
+      }
       ]
     },
     {
-      "Name": "File",
-      "DisplayName": "Files",
-      "Description": "Files registered",
-      "Initiators": ["FileManager"],
-      "StartState":  "New",
-      "Properties": [
-        {
-          "Name": "State",
-          "DisplayName": "State",
-          "Description": "State of the file",
-          "Type": {
-            "Name": "state"
-          }
-        },
-        {
-          "Name": "FileName",
-          "DisplayName": "File Name",
-          "Description": "Name of the file",
-          "Type": {
-            "Name": "string"
-          }
-        },
-        {
-          "Name": "ContentType",
-          "DisplayName": "Content Type",
-          "Description": "Content type of the file",
-          "Type": {
-            "Name": "string"
-          }
-        },
-        {
-          "Name": "RegistryName",
-          "DisplayName": "Registry",
-          "Description": "Name of the registry that the file is located in",
-          "Type": {
-            "Name": "string"
-          }
-        },
-        {
-          "Name": "ProcessedDateTime",
-          "DisplayName": "Uploaded UTC",
-          "Description": "UTC date and time the file was uploaded",
-          "Type": {
-            "Name": "string"
-          }
-        },
-        {
-          "Name": "DeletedDateTime",
-          "DisplayName": "Deleted UTC",
-          "Description": "UTC date and time the file was deleted",
-          "Type": {
-            "Name": "string"
-          }
-        }
-      ],
-      "Constructor": {
-        "Parameters": [
-          {
-            "Name": "registryAddress",
-            "DisplayName": "Registry Address",
-            "Description": "Address of the registry that the file will be added to",
-            "Type": {
-              "Name": "string"
-            }
-          }, 
-          {
-            "Name": "filename",
-            "DisplayName": "File Name",
-            "Description": "Name of the file",
-            "Type": {
-              "Name": "string"
-            }
-          },
-          {
-            "Name": "fileId",
-            "DisplayName": "File Id",
-            "Description": "Id of the file",
-            "Type": {
-              "Name": "string"
-            }
-          },
-          {
-            "Name": "location",
-            "DisplayName": "Location",
-            "Description": "Location of the file",
-            "Type": {
-              "Name": "string"
-            }
-          },
-          {
-            "Name": "fileHash",
-            "DisplayName": "File Hash",
-            "Description": "Hash of the file contents",
-            "Type": {
-              "Name": "string"
-            }
-          },
-          {
-            "Name": "fileMetadataHash",
-            "DisplayName": "File Metadata Hash",
-            "Description": "Hash of the available metdata for the file",
-            "Type": {
-              "Name": "string"
-            }
-          },
-          {
-            "Name": "contentType",
-            "DisplayName": "Content Type",
-            "Description": "Content type of the file",
-            "Type": {
-              "Name": "string"
-            }
-          },
-          {
-            "Name": "etag",
-            "DisplayName": "Etag",
-            "Description": "Etag of the file",
-            "Type": {
-              "Name": "string"
-            }
-          }
-        ]
-      },
-      "Functions": [
-        {
-          "Name": "Verify",
-          "DisplayName": "Verify File",
-          "Description": "Determine if file is unique in registry",
-          "Parameters": []
-        },
-        {
-          "Name": "Delete",
-          "DisplayName": "Delete File",
-          "Description": "Delete file from registry",
-          "Parameters": []
-        }
-      ],
-      "States": [
-        {
-          "Name": "New",
-          "DisplayName": "New",
-          "Description": "File has been created",
-          "PercentComplete": 0,
-          "Style": "Success",
-          "Transitions": [
-            {
-              "AllowedRoles": ["FileManager"],
-              "AllowedInstanceRoles": [],
-              "Description": "Verify File",
-              "Function": "Verify",
-              "NextStates": [ "Matched", "Unique" ],
-              "DisplayName": "File verified"
-            },
-            {
-              "AllowedRoles": ["FileManager"],
-              "AllowedInstanceRoles": [],
-              "Description": "Delete File",
-              "Function": "Delete",
-              "NextStates": [ "Deleted" ],
-              "DisplayName": "File deleted"
-            }
-          ]
-        },
-        {
-          "Name": "Matched",
-          "DisplayName": "SUCCESS: Matched",
-          "Description": "Matching file has been found",
-          "PercentComplete": 100,
-          "Style": "Success",
-          "Transitions": [
-            {
-              "AllowedRoles": ["FileManager"],
-              "AllowedInstanceRoles": [],
-              "Description": "Verify File",
-              "Function": "Verify",
-              "NextStates": [ "Matched", "Unique" ],
-              "DisplayName": "File verified"
-            },
-            {
-              "AllowedRoles": ["FileManager"],
-              "AllowedInstanceRoles": [],
-              "Description": "Delete File",
-              "Function": "Delete",
-              "NextStates": [ "Deleted" ],
-              "DisplayName": "File deleted"
-            }
-          ]
-        },
-        {
-          "Name": "Unique",
-          "DisplayName": "WARNING: Unique",
-          "Description": "No matching file has been found",
-          "PercentComplete": 80,
-          "Style": "Failure",
-          "Transitions": [
-            {
-              "AllowedRoles": ["FileManager"],
-              "AllowedInstanceRoles": [],
-              "Description": "Verify File",
-              "Function": "Verify",
-              "NextStates": [ "Matched", "Unique" ],
-              "DisplayName": "File verified"
-            },
-            {
-              "AllowedRoles": ["FileManager"],
-              "AllowedInstanceRoles": [],
-              "Description": "Delete File",
-              "Function": "Delete",
-              "NextStates": [ "Deleted" ],
-              "DisplayName": "File deleted"
-            }
-          ]
-        },
-        {
-          "Name": "Deleted",
-          "DisplayName": "Deleted",
-          "Description": "File has been deleted",
-          "PercentComplete": 100,
-          "Style": "Success",
-          "Transitions": []
-        }
+      "Name": "Open",
+      "DisplayName": "Registry Opened",
+      "Description": "Registry has been opened",
+      "PercentComplete": 100,
+      "Style": "Success",
+      "Transitions": [            
+      {
+        "AllowedRoles": ["Registrar"],
+        "AllowedInstanceRoles": [],
+        "Description": "Close Registry",
+        "Function": "CloseRegistry",
+        "NextStates": [ "Closed" ],
+        "DisplayName": "Registry has been closed"
+      }
       ]
+    },
+    {
+      "Name": "Closed",
+      "DisplayName": "Registry Closed",
+      "Description": "Registry has been closed",
+      "PercentComplete": 100,
+      "Style": "Success",
+      "Transitions": []
     }
+    ]
+  },
+  {
+    "Name": "File",
+    "DisplayName": "Files",
+    "Description": "Files registered",
+    "Initiators": ["FileManager"],
+    "StartState":  "New",
+    "Properties": [
+    {
+      "Name": "State",
+      "DisplayName": "State",
+      "Description": "State of the file",
+      "Type": {
+      "Name": "state"
+      }
+    },
+    {
+      "Name": "FileName",
+      "DisplayName": "File Name",
+      "Description": "Name of the file",
+      "Type": {
+      "Name": "string"
+      }
+    },
+    {
+      "Name": "ContentType",
+      "DisplayName": "Content Type",
+      "Description": "Content type of the file",
+      "Type": {
+      "Name": "string"
+      }
+    },
+    {
+      "Name": "RegistryName",
+      "DisplayName": "Registry",
+      "Description": "Name of the registry that the file is located in",
+      "Type": {
+      "Name": "string"
+      }
+    },
+    {
+      "Name": "ProcessedDateTime",
+      "DisplayName": "Uploaded UTC",
+      "Description": "UTC date and time the file was uploaded",
+      "Type": {
+      "Name": "string"
+      }
+    },
+    {
+      "Name": "DeletedDateTime",
+      "DisplayName": "Deleted UTC",
+      "Description": "UTC date and time the file was deleted",
+      "Type": {
+      "Name": "string"
+      }
+    }
+    ],
+    "Constructor": {
+    "Parameters": [
+      {
+      "Name": "registryAddress",
+      "DisplayName": "Registry Address",
+      "Description": "Address of the registry that the file will be added to",
+      "Type": {
+        "Name": "string"
+      }
+      }, 
+      {
+      "Name": "filename",
+      "DisplayName": "File Name",
+      "Description": "Name of the file",
+      "Type": {
+        "Name": "string"
+      }
+      },
+      {
+      "Name": "fileId",
+      "DisplayName": "File Id",
+      "Description": "Id of the file",
+      "Type": {
+        "Name": "string"
+      }
+      },
+      {
+      "Name": "location",
+      "DisplayName": "Location",
+      "Description": "Location of the file",
+      "Type": {
+        "Name": "string"
+      }
+      },
+      {
+      "Name": "fileHash",
+      "DisplayName": "File Hash",
+      "Description": "Hash of the file contents",
+      "Type": {
+        "Name": "string"
+      }
+      },
+      {
+      "Name": "fileMetadataHash",
+      "DisplayName": "File Metadata Hash",
+      "Description": "Hash of the available metdata for the file",
+      "Type": {
+        "Name": "string"
+      }
+      },
+      {
+      "Name": "contentType",
+      "DisplayName": "Content Type",
+      "Description": "Content type of the file",
+      "Type": {
+        "Name": "string"
+      }
+      },
+      {
+      "Name": "etag",
+      "DisplayName": "Etag",
+      "Description": "Etag of the file",
+      "Type": {
+        "Name": "string"
+      }
+      }
+    ]
+    },
+    "Functions": [
+    {
+      "Name": "Verify",
+      "DisplayName": "Verify File",
+      "Description": "Determine if file is unique in registry",
+      "Parameters": []
+    },
+    {
+      "Name": "Delete",
+      "DisplayName": "Delete File",
+      "Description": "Delete file from registry",
+      "Parameters": []
+    }
+    ],
+    "States": [
+    {
+      "Name": "New",
+      "DisplayName": "New",
+      "Description": "File has been created",
+      "PercentComplete": 0,
+      "Style": "Success",
+      "Transitions": [
+      {
+        "AllowedRoles": ["FileManager"],
+        "AllowedInstanceRoles": [],
+        "Description": "Verify File",
+        "Function": "Verify",
+        "NextStates": [ "Matched", "Unique" ],
+        "DisplayName": "File verified"
+      },
+      {
+        "AllowedRoles": ["FileManager"],
+        "AllowedInstanceRoles": [],
+        "Description": "Delete File",
+        "Function": "Delete",
+        "NextStates": [ "Deleted" ],
+        "DisplayName": "File deleted"
+      }
+      ]
+    },
+    {
+      "Name": "Matched",
+      "DisplayName": "SUCCESS: Matched",
+      "Description": "Matching file has been found",
+      "PercentComplete": 100,
+      "Style": "Success",
+      "Transitions": [
+      {
+        "AllowedRoles": ["FileManager"],
+        "AllowedInstanceRoles": [],
+        "Description": "Verify File",
+        "Function": "Verify",
+        "NextStates": [ "Matched", "Unique" ],
+        "DisplayName": "File verified"
+      },
+      {
+        "AllowedRoles": ["FileManager"],
+        "AllowedInstanceRoles": [],
+        "Description": "Delete File",
+        "Function": "Delete",
+        "NextStates": [ "Deleted" ],
+        "DisplayName": "File deleted"
+      }
+      ]
+    },
+    {
+      "Name": "Unique",
+      "DisplayName": "WARNING: Unique",
+      "Description": "No matching file has been found",
+      "PercentComplete": 80,
+      "Style": "Failure",
+      "Transitions": [
+      {
+        "AllowedRoles": ["FileManager"],
+        "AllowedInstanceRoles": [],
+        "Description": "Verify File",
+        "Function": "Verify",
+        "NextStates": [ "Matched", "Unique" ],
+        "DisplayName": "File verified"
+      },
+      {
+        "AllowedRoles": ["FileManager"],
+        "AllowedInstanceRoles": [],
+        "Description": "Delete File",
+        "Function": "Delete",
+        "NextStates": [ "Deleted" ],
+        "DisplayName": "File deleted"
+      }
+      ]
+    },
+    {
+      "Name": "Deleted",
+      "DisplayName": "Deleted",
+      "Description": "File has been deleted",
+      "PercentComplete": 100,
+      "Style": "Success",
+      "Transitions": []
+    }
+    ]
+  }
   ]
 }
