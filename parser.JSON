@@ -1,0 +1,47 @@
+{
+    "type": "object",
+    "properties": {
+        "eventTime": {
+            "type": "string"
+        },
+        "topic": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object",
+            "properties": {
+                "ContractId": {
+                    "type": "integer"
+                },
+                "ContractLedgerIdentifier": {
+                    "type": "string"
+                },
+                "ContractProperties": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "WorkflowPropertyId": {
+                                "type": "integer"
+                            },
+                            "Name": {
+                                "type": "string"
+                            },
+                            "Value": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "WorkflowPropertyId",
+                            "Name",
+                            "Value"
+                        ]
+                    }
+                },
+                "IsNewContract": {
+                    "type": "boolean"
+                }
+            }
+        }
+    }
+}
