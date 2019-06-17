@@ -6,4 +6,4 @@ Ethereum-based file registry system for use through Azure Blockchain Workbench w
 **Files** : store data pertaining to a file that was uploaded to OneDrive
 
 ### Workflow Details
-![](State Transitions v1.jpg)
+![](stateTransitions.jpg)
